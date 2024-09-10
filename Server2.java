@@ -6,19 +6,19 @@ public class Server2 {
         ServerSocket serverSocket = new ServerSocket(5001);
         System.out.println("Servidor 2 na porta 5001");
 
-        while (true) {
-            try (Socket clientSocket = serverSocket.accept()) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-                String message = in.readLine();
-                if ("hello".equalsIgnoreCase(message)) {
-                    out.println("world");
-                    System.out.println("Mensagem recebida: " + message);
-                }
-            } catch (IOException e) {
-                System.out.println("Erro de conexão no Servidor 2: " + e.getMessage());
+        try (Socket clientSocket = serverSocket.accept()) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            String message = in.readLine();
+            if ("hello".equalsIgnoreCase(message)) {
+                out.println("world");
+                System.out.println("Mensagem recebida: " + message);
             }
+        } catch (IOException e) {
+            System.out.println("Erro de conexão no Servidor 2: " + e.getMessage());
         }
+
     }
 }
